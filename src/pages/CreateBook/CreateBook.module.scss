@@ -1,0 +1,125 @@
+.create {
+  width: 100%;
+  // padding: 0 30px;
+  margin: 0 auto;
+
+  // position: absolute;
+  // left: 0;
+  // right: 0;
+  // top: 260px;
+
+  @media (min-width: 768px) {
+    margin: -66px auto 0 auto;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 1696px;
+    padding: 0 80px;
+    margin: -90px auto 0 auto;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 20px 0 0 0;
+  }
+
+  & > h3 {
+    background-color: #5a87d0;
+    padding: 15px 30px;
+    border-radius: 15px 15px 0 0;
+    color: white;
+    text-decoration: none;
+    line-height: 1.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  & > form {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 3px 6px #8b88a226;
+    border-radius: 0 0 16px 16px;
+
+    & > div {
+      box-sizing: border-box;
+      -webkit-box-flex: 0;
+      flex: 0 0 100%;
+      padding: calc(0.625rem);
+      max-width: 100%;
+
+      & > label {
+        display: inline-block;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.55;
+        word-break: break-word;
+        cursor: default;
+        -webkit-tap-highlight-color: transparent;
+        color: rgb(33, 37, 41);
+
+        span {
+          color: red;
+        }
+      }
+
+      input,
+      select,
+      textarea {
+        line-height: calc(2.5rem);
+        appearance: none;
+        resize: none;
+        box-sizing: border-box;
+        font-size: 1rem;
+        width: 100%;
+        color: rgb(0, 0, 0);
+        display: block;
+        text-align: left;
+        border: 0.0625rem solid rgb(137, 181, 221);
+        transition: border-color 100ms;
+        min-height: 2.625rem;
+        padding: 0 calc(0.875rem);
+        border-radius: 0.5rem;
+        background-color: rgb(241, 246, 255);
+      }
+
+      & > button {
+        width: 244px;
+        height: 2.625rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        border: 0;
+        background-color: rgb(4, 159, 159);
+        color: rgb(255, 255, 255);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
+        margin-left: auto;
+
+        p {
+          line-height: 1;
+          font-size: 1rem;
+          font-weight: 500;
+        }
+
+        span {
+          font-size: 28px;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .create-seconds {
+    max-width: 50% !important;
+    flex-shrink: 0 0 50;
+  }
+}

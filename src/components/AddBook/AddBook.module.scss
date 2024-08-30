@@ -1,0 +1,39 @@
+.add-book {
+  max-width: 1696px;
+  margin: 0 auto;
+  padding: 0 30px 24px;
+
+  justify-content: flex-end;
+
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 0px 80px 24px;
+  }
+
+  & > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: #5a87d0;
+    width: 250px;
+    height: 42px;
+
+    color: white;
+
+    span {
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}

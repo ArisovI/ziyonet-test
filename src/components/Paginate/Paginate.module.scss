@@ -1,0 +1,36 @@
+.paginate {
+  display: flex;
+  gap: calc(1.25rem / 2);
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    padding-bottom: 40px;
+  }
+  & > li {
+    border: 0.0625rem solid #ced4da;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 500;
+    font-size: 1.125rem;
+    padding: 0 10px;
+  }
+
+  & > .selected {
+    background: #049f9f;
+    color: white;
+    border: 0;
+  }
+
+  & > .break {
+    border: 0;
+  }
+}

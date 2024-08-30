@@ -1,0 +1,191 @@
+.category-item {
+  & > button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 6px;
+    padding: 20px 12px;
+    background: 0;
+    border: 0;
+    cursor: pointer;
+    border-bottom: 1px solid #dfe7f2;
+
+    position: relative;
+
+    @media (min-width: 768px) {
+      padding: 30px 12px;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 16px 8px;
+    }
+
+    & > p {
+      font-size: 13px;
+      line-height: 16px;
+      color: rgba(82, 78, 78, 0.89);
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      &.active {
+        position: relative;
+        z-index: 2;
+        color: white;
+      }
+
+      @media (min-width: 768px) {
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      @media (min-width: 1280px) {
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+    & > span {
+      color: #5a87d0;
+      font-size: 13px;
+      line-height: 16px;
+      font-weight: 600;
+      margin-left: auto;
+      &.active {
+        position: relative;
+        z-index: 2;
+        color: white;
+      }
+      @media (min-width: 768px) {
+        font-size: 20px;
+        line-height: 24px;
+      }
+
+      @media (min-width: 1280px) {
+        font-size: 16px;
+        line-height: 19px;
+      }
+    }
+    & > button {
+      background: none;
+      border: none;
+      width: 30px;
+      height: 30px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &.active {
+        position: relative;
+        z-index: 2;
+        svg {
+          color: white;
+        }
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        color: #5a87d0;
+      }
+    }
+  }
+  &.active > button::after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #5a87d0;
+    box-shadow: 0 3px 6px #00000029;
+    border-radius: 10px;
+    left: -0;
+    transform: scaleX(1.13) scaleY(1.1);
+  }
+}
+
+.childrens {
+  display: flex;
+  flex-direction: column;
+  & > li {
+    position: relative;
+    &.active > button::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-color: #5a87d0;
+      box-shadow: 0 3px 6px #00000029;
+      border-radius: 10px;
+      left: -0;
+      transform: scaleX(1.13) scaleY(1.1);
+    }
+    & > button {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      padding: 20px 25px;
+      border: 0;
+      background: 0;
+      cursor: pointer;
+      border-bottom: 1px solid #dfe7f2;
+
+      @media (min-width: 768px) {
+        padding: 30px 32px;
+      }
+
+      @media (min-width: 1280px) {
+        padding: 23px 25px;
+      }
+
+      p {
+        font-size: 13px;
+        line-height: 16px;
+        color: rgba(82, 78, 78, 0.89);
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        &.active {
+          position: relative;
+          z-index: 2;
+          color: white;
+        }
+
+        @media (min-width: 768px) {
+          font-size: 20px;
+          line-height: 24px;
+        }
+
+        @media (min-width: 1280px) {
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+      span {
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: 600;
+        color: #5a87d0;
+        padding: 0 20px;
+        &.active {
+          position: relative;
+          z-index: 2;
+          color: white;
+        }
+
+        @media (min-width: 768px) {
+          font-size: 20px;
+          line-height: 24px;
+        }
+
+        @media (min-width: 1280px) {
+          font-size: 16px;
+          line-height: 19px;
+        }
+      }
+    }
+  }
+}

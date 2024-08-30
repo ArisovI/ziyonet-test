@@ -1,0 +1,17 @@
+.content {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 30px 40px 30px;
+  margin: 0 auto;
+  gap: 24px;
+
+  @media (min-width: 1024px) {
+    padding: 24px 0 40px;
+  }
+
+  @media (min-width: 1280px) {
+    flex-direction: row;
+    padding: 0 80px 80px 80px;
+    max-width: 1696px;
+  }
+}
