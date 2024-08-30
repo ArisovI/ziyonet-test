@@ -1,22 +1,45 @@
+import { useState, useCallback, useMemo } from "react";
 import { FaAlignRight, FaCircleUser } from "react-icons/fa6";
 import { AiOutlineSearch, AiFillMessage, AiFillBell } from "react-icons/ai";
-import { FaKey, FaUserLock } from "react-icons/fa";
+import { FaKey, FaUserLock, FaAngleDown } from "react-icons/fa";
 import { useAuth } from "../../hooks/useAuth";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.scss";
+
+const options: string[] = ["O'zbekcha", "Узбекча", "Qaraqalpaqsha", "Русский"];
 
 export const Header = () => {
   const { isUser } = useAuth();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<string>("O'zbekcha");
+  const navigate = useNavigate();
+
+  const toggleDropdown = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  const handleSelect = useCallback((option: string) => {
+    setSelectedOption(option);
+    setIsOpen(false);
+  }, []);
+
+  const filteredOptions = useMemo(
+    () => options.filter((option) => option !== selectedOption),
+    [selectedOption]
+  );
+
+  console.log(isUser);
 
   return (
     <>
       <div className={styles.header}>
         <div className={styles.wrapper}>
-          <a href="#">
+          <Link to="/">
             <img
               src="https://audio.ziyonet.uz/images/logo/logo-white-ru.svg"
-              alt=""
+              alt="Logo"
             />
-          </a>
+          </Link>
 
           <div className={styles.search}>
             <input type="text" />
@@ -28,23 +51,32 @@ export const Header = () => {
           </div>
 
           <div className={styles.right}>
-            <select name="" id="" className={styles.select}>
-              <option value="">O'zbekcha</option>
-              <option value="">Узбекча</option>
-              <option value="">Qaraqalpaqsha</option>
-              <option value="">Русский</option>
-            </select>
+            <div className={styles.select}>
+              <button className={styles.selectButton} onClick={toggleDropdown}>
+                <span>{selectedOption}</span>
+                <FaAngleDown />
+              </button>
+              {isOpen && (
+                <ul>
+                  {filteredOptions.map((option, index) => (
+                    <li key={index} onClick={() => handleSelect(option)}>
+                      {option}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
             {isUser === null ? (
               <div className={styles["right-auth"]}>
-                <a href="#">
+                <Link to="/login">
                   <FaKey />
                   <span>Войти</span>
-                </a>
-                <a href="#">
+                </Link>
+                <Link to="/login">
                   <FaUserLock />
                   <span>Регистрация</span>
-                </a>
+                </Link>
               </div>
             ) : (
               <>
@@ -56,7 +88,11 @@ export const Header = () => {
                   <AiFillBell />
                 </button>
 
-                <button type="button" className={styles.login}>
+                <button
+                  type="button"
+                  className={styles.login}
+                  onClick={() => navigate("/login")}
+                >
                   <FaCircleUser />
                 </button>
               </>
@@ -68,18 +104,16 @@ export const Header = () => {
         </div>
       </div>
 
-      {!isUser === null ? (
-        ""
-      ) : (
+      {isUser === null && (
         <div className={styles.auth}>
-          <a href="#">
+          <Link to="/login">
             <FaKey />
             <span>Войти</span>
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="/login">
             <FaUserLock />
             <span>Регистрация</span>
-          </a>
+          </Link>
         </div>
       )}
 

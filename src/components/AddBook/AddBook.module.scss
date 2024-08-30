@@ -7,6 +7,10 @@
 
   display: none;
 
+  &.visible {
+    display: none;
+  }
+
   @media (min-width: 768px) {
     display: flex;
   }

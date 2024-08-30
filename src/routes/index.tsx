@@ -1,3 +1,4 @@
+import axios from "axios";
 import { lazy } from "react";
 import { createBrowserRouter, Link } from "react-router-dom";
 
@@ -21,6 +22,13 @@ const Content = lazy(() =>
   import("../pages").then((module) => ({ default: module.Content }))
 );
 
+const bookLoader = async ({ params }: any) => {
+  const response = await axios.get(
+    `https://api.ziyonet.uz/api/ru/audio/${params.id}`
+  );
+  return response.data.data.title;
+};
+
 export const AppRouter = createBrowserRouter([
   {
     path: "/",
@@ -36,15 +44,20 @@ export const AppRouter = createBrowserRouter([
           {
             path: "/create",
             handle: {
-              crumb: () => <Link to="https://ziyonet.uz/ru">Create</Link>,
+              crumb: () => (
+                <p>Добавить аудиокнигу</p>
+              ),
             },
             element: <CreateBook />,
           },
           {
             path: "book/:id",
             element: <Book />,
+            loader: bookLoader,
             handle: {
-              crumb: () => <Link to="https://ziyonet.uz/ru">Book</Link>,
+              crumb: (data: string) => {
+                return <p>{data}</p>;
+              },
             },
           },
         ],
@@ -55,11 +68,6 @@ export const AppRouter = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
-      },
-
-      {
-        path: "create",
-        element: <CreateBook />,
       },
     ],
   },

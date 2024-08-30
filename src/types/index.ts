@@ -71,3 +71,8 @@ export type TLangugaes = {
   name: string;
   alias: string;
 };
+
+export type TSelectValues = {
+  value: string;
+  label: string;
+};

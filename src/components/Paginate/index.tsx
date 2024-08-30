@@ -14,15 +14,17 @@ const Paginate: React.FC<PaginateProps> = ({
   currentPage,
   data,
 }) => {
+  const handlePageClick = (selectedItem: { selected: number }) => {
+    handlePageChange(selectedItem.selected + 1);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <ReactPaginate
       pageCount={Math.ceil(data.pagination.records / 18)}
       pageRangeDisplayed={5}
       marginPagesDisplayed={1}
       className={styles.paginate}
-      onPageChange={(selectedItem) =>
-        handlePageChange(selectedItem.selected + 1)
-      }
+      onPageChange={handlePageClick}
       forcePage={currentPage - 1}
       previousLabel={"<"}
       nextLabel={">"}

@@ -12,8 +12,11 @@
   }
   & > ol {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     padding: 20px 0;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
 
     li {
       white-space: nowrap;

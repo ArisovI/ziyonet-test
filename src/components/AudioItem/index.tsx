@@ -49,22 +49,22 @@ export const AudioItem: React.FC<AudioItemProps> = ({ data }) => {
       <ul className={styles.info}>
         <li>
           <p>Тип</p>
-          <a href="#">{data.category.name}</a>
+          <Link to={data.id.toString()}>{data.category.name}</Link>
         </li>
 
         <li>
           <p>Язык</p>
-          <a href="#">{data.language.name}</a>
+          <Link to={data.id.toString()}>{data.language.name}</Link>
         </li>
 
         <li>
           <p>Жанр</p>
-          <a href="#">{data.genre.name}</a>
+          <Link to={data.id.toString()}>{data.genre.name}</Link>
         </li>
 
         <li>
           <p>Год</p>
-          <a href="#">{data.year}</a>
+          <Link to={data.id.toString()}>{data.year}</Link>
         </li>
       </ul>
     </li>

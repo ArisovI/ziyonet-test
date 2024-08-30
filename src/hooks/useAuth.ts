@@ -8,19 +8,19 @@ export const useAuth = () => {
   const [isUser, setIsUser] = useState<TIsUser | null>(null);
 
   const user = Cookies.get("token");
-  const { mutate, data } = useMutation({
+
+  const { mutate } = useMutation({
     mutationFn: reAuthUser,
+    onSuccess: (data) => {
+      setIsUser(data);
+    },
   });
 
   useEffect(() => {
     if (user !== undefined) {
       mutate(user);
-
-      if (data !== undefined) {
-        setIsUser(data);
-      }
     }
-  }, [mutate, data]);
+  }, [user, mutate]);
 
   return { isUser };
 };

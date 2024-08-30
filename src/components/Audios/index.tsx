@@ -1,9 +1,13 @@
 import { AudioItem } from "../AudioItem";
-import { TAudios, TAudiosItem } from "../../types";
+import { TAudios, TAudiosItem, TSelectValues } from "../../types";
 import Paginate from "../Paginate";
 import styles from "./Audios.module.scss";
 import { AiFillBook } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
+import { AiFillSetting } from "react-icons/ai";
+import { useState } from "react";
+import CustomSelect from "../ui/CustomSelect";
+import { SkeletonBlock } from "../Skeleton";
 
 type IAudiosProps = {
   data: TAudios;
@@ -23,9 +27,29 @@ export const Audios: React.FC<IAudiosProps> = ({
   currentPage,
 }) => {
   const location = useLocation();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>(selectValue);
+
+  const options: TSelectValues[] = [
+    { value: "", label: "Все аудиокниги" },
+    { value: "recent", label: "Недавно добавленные" },
+    { value: "popular", label: "По рейтингу" },
+    { value: "downloads", label: "По загрузкам" },
+    { value: "best", label: "По прослушиваниям" },
+  ];
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleSelected = (value: string, label: string) => {
+    setSelected(label);
+    setIsOpen(false);
+    handleSelect(value);
+  };
 
   if (isLoading) {
-    return <div>loading...</div>;
+    return <SkeletonBlock />;
   }
 
   return (
@@ -47,7 +71,20 @@ export const Audios: React.FC<IAudiosProps> = ({
           <Link to="/create" className={styles.create}>
             +
           </Link>
-          <select
+          <div className={styles.select}>
+            <button onClick={toggleDropdown}>
+              <AiFillSetting />
+            </button>
+            {isOpen && (
+              <CustomSelect
+                options={options}
+                handleSelected={handleSelected}
+                selected={selected}
+              />
+            )}
+          </div>
+
+          {/* <select
             onChange={(event) => handleSelect(event.target.value)}
             value={selectValue}
           >
@@ -56,7 +93,7 @@ export const Audios: React.FC<IAudiosProps> = ({
             <option value="popular">По рейтингу</option>
             <option value="downloads">По загрузкам</option>
             <option value="best">По прослушиваниям</option>
-          </select>
+          </select> */}
         </div>
 
         <ul className={styles["audios-content"]}>
