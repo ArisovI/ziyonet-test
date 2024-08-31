@@ -9,7 +9,12 @@ import Cookies from "js-cookie";
 import styles from "./Login.module.scss";
 
 export const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [validation, setValidation] = useState({
+    isLogin: false,
+    isPass: false,
+    isCaptcha: false,
+  });
   const navigate = useNavigate();
   const { data, isLoading, refetch } = useQuery({
     queryFn: () => getCaptcha(),
@@ -40,6 +45,16 @@ export const Login = () => {
     const captcha = formElements.captcha.value;
     const key = data.key;
 
+    setValidation({
+      isLogin: !formElements.login.value,
+      isPass: !password,
+      isCaptcha: !captcha,
+    });
+
+    if (!formElements.login.value || !password || !captcha) {
+      return;
+    }
+
     const formData = {
       login,
       password,
@@ -68,6 +83,9 @@ export const Login = () => {
             Логин <span>*</span>
           </label>
           <input id="login" name="login" type="text" />
+          {validation.isLogin && (
+            <span className={styles.errors}>Обязательное поле</span>
+          )}
           <select id="emailDomain" name="emailDomain">
             <option value="@umail.uz">@umail.uz</option>
             <option value="@id.uz">@id.uz</option>
@@ -81,9 +99,12 @@ export const Login = () => {
           <input
             id="password"
             name="password"
-            required
             type={showPassword ? "text" : "password"}
           />
+          {validation.isPass && (
+            <span className={styles.errors}>Обязательное поле</span>
+          )}
+
           <button type="button" onClick={handleShowPassword}>
             <FaEye />
           </button>
@@ -97,11 +118,16 @@ export const Login = () => {
         </div>
 
         <div className={styles["form-item"]}>
-          <label htmlFor="code">
+          <label htmlFor="captcha">
             Код проверки <span>*</span>
           </label>
-          <input id="code" name="captcha" type="text" required />
-          {isError === true ? <span>Просрочен срок действия капчи</span> : ""}
+          <input id="captcha" name="captcha" type="text" />
+          {validation.isCaptcha && (
+            <span className={styles.errors}>Обязательное поле</span>
+          )}
+          {isError && (
+            <span className={styles.errors}>Просрочен срок действия капчи</span>
+          )}
         </div>
 
         <button type="submit" className={styles["form-enter"]}>

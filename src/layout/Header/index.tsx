@@ -28,8 +28,6 @@ export const Header = () => {
     [selectedOption]
   );
 
-  console.log(isUser);
-
   return (
     <>
       <div className={styles.header}>
